@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Inspeccionar la máquina
-        run: |
-          ls -alh
-          whoami
-          pwd
-          node -v 
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build
+          working-directory: ./hangman-api
+          run: |
+            npm ci
+            npm run build
+            npm run test
+          
