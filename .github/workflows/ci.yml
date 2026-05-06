@@ -14,9 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Build
-          working-directory: ./hangman-api
+        working-directory: ./hangman-api
           run: |
-            npm ci
+           npm ci
             npm run build
             npm run test
           
