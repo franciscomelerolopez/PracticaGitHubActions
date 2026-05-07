@@ -42,7 +42,7 @@ jobs:
   bye:
     runs-on: ubuntu-latest
     needs: test
-    if: ${{always()}}
+    if: ${{ always() }}
     steps:
       - name: Bye
         run: echo "Hasta luego Francisco Melero"
