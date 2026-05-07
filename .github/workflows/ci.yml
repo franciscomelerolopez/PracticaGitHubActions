@@ -9,22 +9,39 @@ on:
       paths: [ 'hangman-api/**' ]
 
 jobs:
-  audit:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-        matrix:
-            node-version: [16, 17, 18]
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node.js version
         uses: actions/setup-node@v4  
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Build and test
+          node-version: 18
+      - name: Build
         working-directory: ./hangman-api
         run: |
            npm ci
             npm run build
-            npm run test
-          
+  test:
+    runs-on: ubuntu-latest
+    needs: build  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4  
+        with:
+          node-version: 18
+      - name: test
+        working-directory: ./hangman-api
+        run: |
+           npm ci
+           npm run test
+  bye:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Bye
+        run: echo "Hasta luego Francisco Melero"
